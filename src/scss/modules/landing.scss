@@ -1,0 +1,145 @@
+@use "../mixins/colors.scss";
+$min-width: 53rem;
+section.landing {
+  padding: var(--spacing-xl) calc(var(--standard-section-padding-x) / 2);
+  margin-block: auto;
+  container-type: inline-size;
+
+  color: var(--text-color-primary);
+  .slider {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: var(--spacing-xxl);
+
+    .card {
+      display: grid;
+      position: relative;
+      z-index: 1;
+      transition: all var(--transition-duration-fast) ease;
+      width: 100%;
+      overflow: hidden;
+      height: var(--answer-height);
+      background: linear-gradient(
+          270deg,
+          rgba(0, 0, 0, 0) 13.98%,
+          rgba(0, 0, 0, 0.4) 100%
+        ),
+        linear-gradient(
+          180deg,
+          rgba(47, 0, 255, 0) 0%,
+          rgba(0, 141, 255, 0.4) 100%
+        ),
+        var(--bg-img);
+      background-size: cover;
+      background-position: center;
+      border-radius: var(--radius-lg);
+      background-repeat: no-repeat;
+      background-blend-mode: normal, normal, normal;
+      .content {
+        transition: all var(--transition-duration-fast) ease;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        opacity: 0;
+        padding: calc(var(--spacing-3xl) - 0.625rem) var(--spacing-xxl);
+
+        .headline {
+          p {
+            padding-block: var(--spacing-sm);
+          }
+          .heading {
+            padding-bottom: var(--spacing-xs);
+          }
+        }
+        .text-fields {
+          margin-block: var(--spacing-sm);
+          .copy {
+            display: flex;
+            align-items: center;
+            padding-block: 0.5rem;
+            border-top: 1px solid var(--text-color-primary);
+            .eyebrow {
+              padding-left: var(--spacing-xxs);
+            }
+
+            a:hover {
+              border-bottom: 1px solid var(--text-color-primary);
+            }
+          }
+          &:nth-last-child(n) {
+            border-bottom: 1px solid var(--text-color-primary);
+          }
+        }
+        .button {
+          margin-right: auto;
+        }
+      }
+
+      @media (max-width: 40rem) {
+        .content {
+          padding: var(--spacing-xs) var(--spacing-xxs);
+          .text-fields {
+            .copy .eyebrow {
+              padding-left: 0;
+            }
+          }
+        }
+      }
+
+      //active state of card starts here
+      &.active {
+        @container (min-width:  #{$min-width}) {
+          .content {
+            padding-right: 0;
+          }
+        }
+        .content {
+          opacity: 1;
+        }
+      }
+      // inactive state of card starts here
+      &:not(.active) {
+        @container (min-width:  #{$min-width}) {
+          display: block;
+          min-width: 1.5rem;
+          width: 5.625rem;
+          &:hover {
+            max-width: 10rem;
+            width: 10rem;
+          }
+          &:hover ~ .card:not(.active),
+          &:has(~ .card:hover:not(.active)) {
+            width: 1.5rem;
+          }
+        }
+        @container (max-width: #{$min-width}) {
+          min-height: 1.5rem;
+          height: 5.625rem;
+          &:hover {
+            max-height: 10rem;
+            height: 10rem;
+          }
+          &:hover ~ .card:not(.active),
+          &:has(~ .card:hover:not(.active)) {
+            height: 1.5rem;
+          }
+        }
+        .content {
+          pointer-events: none;
+        }
+      }
+    }
+    @container (min-width: #{$min-width}) {
+      flex-direction: row;
+      .card {
+        container-type: unset;
+        height: unset;
+        .content {
+          width: 37.14rem;
+          padding-right: unset;
+        }
+      }
+    }
+  }
+}

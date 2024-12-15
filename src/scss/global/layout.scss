@@ -1,0 +1,32 @@
+/**
+Layout global CSS variables.
+
+These can be used to get default layout values anywhere on the site, for example gutter width.
+*/
+
+@layer layout {
+  :root {
+    // Spacing
+    --standard-section-padding-x: max(1.5rem, 12.5%);
+    --standard-section-padding-x-vw: max(1.5rem, 12.5vw); // 240px
+
+    --spacing-4xl: max(5rem, 8.33vw); // 80px - 160px+
+    --spacing-3xl: max(4.5rem, 6.25vw); // 72px - 120px+
+    --spacing-xxl: max(3.125rem, 4.17vw); // 50px - 80px+
+    --spacing-xl: max(2.5rem, 3.33vw); // 40px - 64px+
+    --spacing-lg: max(2.25rem, 2.5vw); // 36px - 48px+
+    --spacing-md: max(2rem, 2.08vw); // 32px - 40px+
+    --spacing-sm: max(1.5rem, 1.67vw); // 24px - 32px+
+    --spacing-xs: max(1rem, 1.25vw); // 16px - 24px+
+    --spacing-xxs: max(0.75rem, 0.83vw); // 12px - 16px+
+    --spacing-3xs: max(0.5rem, 0.625vw); // 8px - 12px+
+    --spacing-4xs: max(0.5rem, 0.42vw); // 8px+
+    --spacing-5xs: max(0.25rem, 0.2vw); // 4px+
+
+    // Radii
+    --radius-xl: max(2.5rem, 2.08vw); // 40px
+    --radius-lg: max(1.5rem, 1.25vw); // 24px
+    --radius-md: max(1rem, 0.83vw); //16px
+    --radius-sm: max(0.75rem, 0.625vw); // 12px
+  }
+}

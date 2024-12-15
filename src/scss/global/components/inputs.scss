@@ -1,0 +1,251 @@
+@use "../../mixins/breakpoints.scss";
+@use "../../mixins/colors.scss";
+
+@layer base-site {
+  form {
+    display: grid;
+    gap: var(--spacing-xxs);
+    .fw {
+      grid-column: 1 / -1;
+    }
+
+    @include breakpoints.tablet {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    fieldset {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label,
+    legend {
+      font-weight: 400;
+      font-family: var(--font-family-regular);
+      font-size: var(--font-size-body-sm);
+      margin-bottom: var(--spacing-3xs);
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-3xs);
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    textarea,
+    select {
+      --border-width: 0.0625rem;
+      --line-height: 1em;
+
+      display: inline-block;
+      width: 100%;
+      font-family: var(--font-family-heading);
+      font-size: var(--font-size-body-sm);
+      line-height: var(--line-height);
+      font-weight: 400;
+      color: inherit;
+      padding: var(--spacing-3xs);
+      border-radius: var(--radius-sm);
+      border: var(--border-width) solid currentColor;
+      background-color: transparent;
+      height: calc(
+        var(--line-height) + var(--spacing-3xs) * 2 + var(--border-width) * 2
+      );
+
+      &::placeholder {
+        color: inherit;
+        opacity: 0.5;
+      }
+    }
+
+    select {
+      background-color: var(--bg-color);
+    }
+
+    button[type="submit"],
+    input[type="submit"] {
+      cursor: pointer;
+      margin-right: auto;
+    }
+
+    textarea {
+      min-height: 8em;
+      max-height: 16em;
+    }
+
+    fieldset.radio,
+    fieldset.checkbox {
+      column-gap: var(--spacing-lg);
+
+      legend {
+        width: 100%;
+      }
+
+      input[type="radio"],
+      input[type="checkbox"] {
+        display: none;
+
+        &:checked {
+          + label {
+            &::after {
+              opacity: 1;
+              transform: scale(1);
+            }
+          }
+        }
+      }
+
+      label {
+        position: relative;
+        display: inline-flex;
+        cursor: pointer;
+
+        &::before {
+          content: "";
+          display: inline-block;
+          width: 1rem;
+          height: 1rem;
+          border: 0.0625rem solid currentColor;
+          border-radius: 50%;
+          margin-right: 0.75rem;
+          flex-shrink: 0;
+          position: relative;
+          top: -0.0625rem;
+          opacity: 0.4;
+        }
+
+        &::after {
+          content: "";
+          display: inline-block;
+          width: 0.5rem;
+          height: 0.5rem;
+          border: 0.0625rem solid transparent;
+          border-radius: 50%;
+          flex-shrink: 0;
+
+          position: absolute;
+          left: 0.25rem;
+          top: 0.1875rem;
+          color: var(--text-color-accent);
+          background-color: currentColor;
+          border-color: currentColor;
+          transform: scale(0.8);
+          opacity: 0;
+
+          transition: {
+            property: transform, opacity;
+            duration: var(--transition-duration);
+            timing-function: var(--transition-timing-function);
+          }
+        }
+      }
+
+      @include breakpoints.mobile {
+        flex-direction: row;
+      }
+    }
+
+    fieldset.checkbox {
+      flex-direction: row;
+
+      label {
+        &::before {
+          border-radius: 0.25rem;
+        }
+
+        &::after {
+          width: 0.625rem;
+          height: 0.625rem;
+          left: 0.1875rem;
+          top: 0.125rem;
+          border-radius: 0.125rem;
+        }
+      }
+    }
+
+    fieldset.privacy {
+      label {
+        font-size: var(--font-size-xxxs);
+        font-weight: 400;
+      }
+    }
+
+    label.required,
+    legend.required {
+      &::after {
+        content: "*";
+        font-size: 0.75em;
+        vertical-align: top;
+        color: var(--status-color-required);
+      }
+    }
+
+    textarea {
+      border-radius: var(--radius-sm);
+      resize: vertical;
+    }
+
+    output.status {
+      width: 100%;
+      font-family: var(--font-family-primary);
+      line-height: 1.5;
+      font-weight: 400;
+      color: inherit;
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-xs);
+      display: none;
+
+      &:not(:empty) {
+        padding: var(--spacing-xxs);
+        display: block;
+      }
+
+      &.success {
+        background-color: var(--status-color-success);
+        color: var(--text-color-dark);
+      }
+
+      &.error {
+        background-color: var(--status-color-error);
+        color: var(--text-color-dark);
+      }
+    }
+
+    .cf-turnstile {
+      display: none;
+    }
+  }
+  ._error._below,
+  ._form_error {
+    width: 100%;
+    font-family: var(--font-family-primary);
+    line-height: 1.5;
+    font-weight: 400;
+    color: inherit;
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-xxs);
+    background-color: var(--status-color-error);
+    color: var(--text-color-dark);
+    padding: var(--spacing-xxxs) var(--spacing-xxs);
+    margin-top: var(--spacing-xxxs);
+  }
+
+  ._form-thank-you {
+    width: 100%;
+    font-family: var(--font-family-primary);
+    line-height: 1.5;
+    font-weight: 400;
+    color: inherit;
+    padding: 0.625em 1em;
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-xs);
+    display: none;
+    background-color: var(--status-color-success);
+    color: var(--text-color-dark);
+
+    &:not(:empty) {
+      padding: var(--spacing-xxs);
+      display: block;
+    }
+  }
+}

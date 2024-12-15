@@ -1,0 +1,19 @@
+---
+// Base Layout
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// Global Styles
+import "../styles/assets/css/global.css";
+
+// Modules
+import Bubbles from "../components/BubbleBackdrop.astro";
+import Landing from "../components/LandingPage.astro";
+---
+
+<!-- NOTE: when deploying deploy to dist -->
+<BaseLayout>
+  <main>
+    <Bubbles />
+    <Landing />
+  </main>
+</BaseLayout>
